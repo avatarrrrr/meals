@@ -26,7 +26,7 @@ const DUMMY_CATEGORIES = const [
   Category(
     id: 'c5',
     title: 'Leve & Saudável',
-    color: Colors.black,
+    color: Colors.indigoAccent,
   ),
   Category(
     id: 'c6',
