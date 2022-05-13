@@ -33,7 +33,7 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - run: flutter build apk
+      - run: flutter build apk --ignore-deprecation
       # - run: flutter build appbundle
       - id: version
         run: |
