@@ -38,7 +38,7 @@ jobs:
         uses: android-actions/setup-android@v2
       - id: version
         run: |
-          echo $(ls ~/Android/Sdk/build-tools/)
+          echo $(ls /usr/local/lib/android/sdk/build-tools)
           VERSION_NAME=$(~/Android/Sdk/build-tools/*/aapt2 dump badging build/app/outputs/flutter-apk/app-release.apk | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//")
           VERSION_CODE=$(~/Android/Sdk/build-tools/*/aapt2 dump badging build/app/outputs/flutter-apk/app-release.apk | grep "versionCode" | sed -e "s/.*versionCode='//" -e "s/' .*//")
           echo "::set-output name=version::$VERSION_NAME+$VERSION_CODE"
