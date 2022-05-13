@@ -33,18 +33,20 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - run: flutter build apk --ignore-deprecation
-      # - run: flutter build appbundle
+#      - run: flutter build apk
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
       - id: version
         run: |
+          echo $(ls ~/Android/Sdk/build-tools/)
           VERSION_NAME=$(~/Android/Sdk/build-tools/*/aapt2 dump badging build/app/outputs/flutter-apk/app-release.apk | grep "versionName" | sed -e "s/.*versionName='//" -e "s/' .*//")
           VERSION_CODE=$(~/Android/Sdk/build-tools/*/aapt2 dump badging build/app/outputs/flutter-apk/app-release.apk | grep "versionCode" | sed -e "s/.*versionCode='//" -e "s/' .*//")
           echo "::set-output name=version::$VERSION_NAME+$VERSION_CODE"
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ steps.version.outputs.version }}
-          prerelease: false
-          title: release ${{ steps.version.outputs.version }}
-          files: |
-            build/app/outputs/apk/release/app-release.apk
+#      - uses: "marvinpinto/action-automatic-releases@latest"
+#        with:
+#          repo_token: ${{ secrets.GITHUB_TOKEN }}
+#          automatic_release_tag: ${{ steps.version.outputs.version }}
+#          prerelease: false
+#          title: release ${{ steps.version.outputs.version }}
+#          files: |
+#            build/app/outputs/apk/release/app-release.apk
